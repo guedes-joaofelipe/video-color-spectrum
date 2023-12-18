@@ -1,3 +1,7 @@
+# Data folders
+data
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -120,6 +124,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+*.DS_Store
 .env
 .venv
 env/

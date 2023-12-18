@@ -1,0 +1,38 @@
+clusters: 3
+frequency: 1
+
+videos:
+  -
+    output_folder: data/abertura-caminho-das-indias
+    url: https://www.youtube.com/watch?v=6YVjYQ1xg-M
+    resolution: 144p
+
+  -
+    output_folder: data/abertura-o-clone
+    url: https://www.youtube.com/watch?v=eAS0XDyI_M8
+    resolution: 144p
+
+  -
+    output_folder: data/abertura-globeleza
+    url: https://www.youtube.com/watch?v=gRgrMzZqAEY
+    resolution: 144p
+
+  -
+    output_folder: data/abertura-jornal-nacional
+    url: https://www.youtube.com/watch?v=q7h0dxmk_5M
+    resolution: 144p
+
+  -
+    output_folder: data/abertura-bom-dia-brasil
+    url: https://www.youtube.com/watch?v=UIKX5mvJC-E
+    resolution: 144p
+
+  -
+    output_folder: data/abertura-jornal-hoje
+    url: https://www.youtube.com/watch?v=jNniqmogKZU
+    resolution: 144p
+
+  -
+    output_folder: data/abertura-esporte-espetacular
+    url: https://www.youtube.com/watch?v=WNRP3aBhbcQ
+    resolution: 144p
