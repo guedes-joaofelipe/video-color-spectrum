@@ -1,2 +1,2 @@
 run:
-	python main.py
+	python main.py --parallel=4

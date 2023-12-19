@@ -1,25 +1,14 @@
 clusters: 3
 frequency: 1
+kernel_size: 1
+smooth: GaussianBlur
+figsize: [20, 5]
 
 videos:
-  -
-    output_folder: data/abertura-caminho-das-indias
-    url: https://www.youtube.com/watch?v=6YVjYQ1xg-M
-    resolution: 144p
 
   -
-    output_folder: data/abertura-o-clone
-    url: https://www.youtube.com/watch?v=eAS0XDyI_M8
-    resolution: 144p
-
-  -
-    output_folder: data/abertura-globeleza
-    url: https://www.youtube.com/watch?v=gRgrMzZqAEY
-    resolution: 144p
-
-  -
-    output_folder: data/abertura-jornal-nacional
-    url: https://www.youtube.com/watch?v=q7h0dxmk_5M
+    output_folder: data/abertura-hora-1
+    url: https://www.youtube.com/watch?v=BNaT9M5-Q1o
     resolution: 144p
 
   -
@@ -28,11 +17,26 @@ videos:
     resolution: 144p
 
   -
+    output_folder: data/abertura-esporte-espetacular
+    url: https://www.youtube.com/watch?v=WNRP3aBhbcQ
+    resolution: 144p
+
+  -
     output_folder: data/abertura-jornal-hoje
     url: https://www.youtube.com/watch?v=jNniqmogKZU
     resolution: 144p
 
   -
-    output_folder: data/abertura-esporte-espetacular
-    url: https://www.youtube.com/watch?v=WNRP3aBhbcQ
+    output_folder: data/abertura-rjtv-1
+    url: https://www.youtube.com/watch?v=3mRkBhiSVtE
+    resolution: 144p
+
+  -
+    output_folder: data/abertura-rjtv-2
+    url: https://www.youtube.com/watch?v=nLsbwBWM0R4
+    resolution: 144p
+
+  -
+    output_folder: data/abertura-jornal-nacional
+    url: https://www.youtube.com/watch?v=q7h0dxmk_5M
     resolution: 144p
