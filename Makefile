@@ -11,7 +11,7 @@ clean:
 	rm -r -f ./data/*/experiments
 
 run:
-	python main.py --parallel=1
+	python main.py --parallel=5
 
 server:
 	mlflow server \

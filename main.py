@@ -14,7 +14,9 @@ def process_video(
     frequency: int = default.FREQUENCY,
     smooth: dict = default.SMOOTH,
     figsize: tuple = default.FIGSIZE,
+    tracking_uri: str = default.TRACKING_URI,
 ):
+    mlflow.set_tracking_uri(tracking_uri)
     experiment = mlflow.set_experiment(video_configs["output_folder"])
 
     with mlflow.start_run(experiment_id=experiment.experiment_id, nested=True):
@@ -72,7 +74,6 @@ if __name__ == "__main__":
     n_cores = min(len(video_configs), int(args.parallel))
     print(f"Processing {n_cores} videos in parallel")
 
-    mlflow.set_tracking_uri(configs["mlflow-tracking-uri"])
     experiments_args = [
         (
             video_config,
@@ -80,6 +81,7 @@ if __name__ == "__main__":
             configs["frequency"],
             configs["smooth"],
             configs["figsize"],
+            configs["tracking_uri"],
         )
         for video_config in video_configs
     ]

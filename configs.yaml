@@ -1,6 +1,6 @@
-mlflow-tracking-uri: ./data/mlflow
+tracking_uri: ./data/mlflow
 
-frequency: 10
+frequency: 1
 
 smooth:
   method: GaussianBlur
@@ -28,27 +28,27 @@ videos:
     url: https://www.youtube.com/watch?v=UIKX5mvJC-E
     resolution: 144p
 
-  # -
-  #   output_folder: abertura-esporte-espetacular
-  #   url: https://www.youtube.com/watch?v=WNRP3aBhbcQ
-  #   resolution: 144p
+  -
+    output_folder: abertura-esporte-espetacular
+    url: https://www.youtube.com/watch?v=WNRP3aBhbcQ
+    resolution: 144p
 
-  # -
-  #   output_folder: abertura-jornal-hoje
-  #   url: https://www.youtube.com/watch?v=jNniqmogKZU
-  #   resolution: 144p
+  -
+    output_folder: abertura-jornal-hoje
+    url: https://www.youtube.com/watch?v=jNniqmogKZU
+    resolution: 144p
 
-  # -
-  #   output_folder: abertura-rjtv-1
-  #   url: https://www.youtube.com/watch?v=3mRkBhiSVtE
-  #   resolution: 144p
+  -
+    output_folder: abertura-rjtv-1
+    url: https://www.youtube.com/watch?v=3mRkBhiSVtE
+    resolution: 144p
 
-  # -
-  #   output_folder: abertura-rjtv-2
-  #   url: https://www.youtube.com/watch?v=nLsbwBWM0R4
-  #   resolution: 144p
+  -
+    output_folder: abertura-rjtv-2
+    url: https://www.youtube.com/watch?v=nLsbwBWM0R4
+    resolution: 144p
 
-  # -
-  #   output_folder: abertura-jornal-nacional
-  #   url: https://www.youtube.com/watch?v=q7h0dxmk_5M
-  #   resolution: 144p
+  -
+    output_folder: abertura-jornal-nacional
+    url: https://www.youtube.com/watch?v=q7h0dxmk_5M
+    resolution: 144p

@@ -9,3 +9,5 @@ FREQUENCY = 10
 RANDOM_STATE = 0
 
 SMOOTH = {"method": "GaussianBlur", "kernel_size": 5}
+
+TRACKING_URI = "./data/mlflow"
