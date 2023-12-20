@@ -1,43 +1,50 @@
 import os
 
+import mlflow
 import numpy as np
 from tqdm import tqdm
 
-from src import frame_ops, plot
+from src import default, frame_ops, plot
 from src.video import Video
 
 
 def process_video(
-        video_configs: dict,
-        clusters: int = 3,
-        frequency: int = 10,
-        kernel_size: int = 5,
-        smooth: str = "GaussianBlur",
-        figsize: tuple = (16,5)
-    ):
+    video_configs: dict,
+    color_extraction: dict = default.COLOR_EXTRACTION,
+    frequency: int = default.FREQUENCY,
+    smooth: dict = default.SMOOTH,
+    figsize: tuple = default.FIGSIZE,
+):
+    experiment = mlflow.set_experiment(video_configs["output_folder"])
 
-    video = Video(**video_configs)
+    with mlflow.start_run(experiment_id=experiment.experiment_id, nested=True):
+        configs = {
+            "video_configs": video_configs,
+            "color_extraction": color_extraction,
+            "frequency": frequency,
+            "smooth": smooth,
+        }
+        for key, value in configs.items():
+            mlflow.log_param(key, value)
 
-    video.download()
+        video = Video(**video_configs)
 
-    video.to_frames()
+        video.download(force=False)
 
-    frames = video.sample(frequency)
+        video.to_frames()
 
-    if smooth:
-        frames = np.array([
-            frame_ops.smooth(frame, kernel_size, method=smooth)
-            for frame in frames
-        ])
+        frames = video.sample(frequency)
 
-    frame_colors = np.array([
-        frame_ops.get_color(frame, clusters)
-        for frame in tqdm(frames)
-    ])
+        if smooth:
+            frames = np.array([frame_ops.smooth(frame, **smooth) for frame in frames])
 
-    fig, _ = plot.spectrum(frame_colors, figsize=figsize)
+        frame_colors = np.array(
+            [frame_ops.get_color(frame, color_extraction) for frame in tqdm(frames)]
+        )
 
-    fig.savefig(os.path.join(video.output_folder, "spectrum.jpg"), bbox_inches="tight")
+        fig, _ = plot.spectrum(frame_colors, figsize=figsize)
+        mlflow.log_figure(fig, "spectrum.jpg")
+        mlflow.log_artifact(video.log_filepath)
 
 
 if __name__ == "__main__":
@@ -46,8 +53,15 @@ if __name__ == "__main__":
     import yaml
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-c", "--configs", default="configs.yaml", help = "Path to configs yaml")
-    parser.add_argument("-p", "--parallel", default=3, help = "Defines the number of parallel videos to be processed")
+    parser.add_argument(
+        "-c", "--configs", default="configs.yaml", help="Path to configs yaml"
+    )
+    parser.add_argument(
+        "-p",
+        "--parallel",
+        default=3,
+        help="Defines the number of parallel videos to be processed",
+    )
 
     args = parser.parse_args()
 
@@ -56,25 +70,26 @@ if __name__ == "__main__":
 
     video_configs = configs.pop("videos")
     n_cores = min(len(video_configs), int(args.parallel))
-    print (f"Processing {n_cores} videos in parallel")
+    print(f"Processing {n_cores} videos in parallel")
 
+    mlflow.set_tracking_uri(configs["mlflow-tracking-uri"])
     experiments_args = [
         (
             video_config,
-            configs["clusters"],
+            configs["color_extraction"],
             configs["frequency"],
-            configs["kernel_size"],
             configs["smooth"],
-            configs["figsize"]
+            configs["figsize"],
         )
         for video_config in video_configs
     ]
 
     if n_cores == 1:
-        for video_config in video_configs:
-            process_video(*experiments_args)
+        for args in experiments_args:
+            process_video(*args)
     else:
         import multiprocessing
+
         if n_cores <= 0:
             n_cores = multiprocessing.cpu_count()
 

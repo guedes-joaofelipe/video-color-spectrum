@@ -1,42 +1,54 @@
-clusters: 3
-frequency: 1
-kernel_size: 1
-smooth: GaussianBlur
+mlflow-tracking-uri: ./data/mlflow
+
+frequency: 10
+
+smooth:
+  method: GaussianBlur
+  kernel_size: 1
+
 figsize: [20, 5]
 
-videos:
+color_extraction:
+  # method: DBSCAN
+  # params:
+  #   eps: 3
+  #   min_samples: 2
+  method: KMeans
+  params:
+    n_clusters: 3
 
+videos:
   -
-    output_folder: data/abertura-hora-1
+    output_folder: abertura-hora-1
     url: https://www.youtube.com/watch?v=BNaT9M5-Q1o
     resolution: 144p
 
   -
-    output_folder: data/abertura-bom-dia-brasil
+    output_folder: abertura-bom-dia-brasil
     url: https://www.youtube.com/watch?v=UIKX5mvJC-E
     resolution: 144p
 
-  -
-    output_folder: data/abertura-esporte-espetacular
-    url: https://www.youtube.com/watch?v=WNRP3aBhbcQ
-    resolution: 144p
+  # -
+  #   output_folder: abertura-esporte-espetacular
+  #   url: https://www.youtube.com/watch?v=WNRP3aBhbcQ
+  #   resolution: 144p
 
-  -
-    output_folder: data/abertura-jornal-hoje
-    url: https://www.youtube.com/watch?v=jNniqmogKZU
-    resolution: 144p
+  # -
+  #   output_folder: abertura-jornal-hoje
+  #   url: https://www.youtube.com/watch?v=jNniqmogKZU
+  #   resolution: 144p
 
-  -
-    output_folder: data/abertura-rjtv-1
-    url: https://www.youtube.com/watch?v=3mRkBhiSVtE
-    resolution: 144p
+  # -
+  #   output_folder: abertura-rjtv-1
+  #   url: https://www.youtube.com/watch?v=3mRkBhiSVtE
+  #   resolution: 144p
 
-  -
-    output_folder: data/abertura-rjtv-2
-    url: https://www.youtube.com/watch?v=nLsbwBWM0R4
-    resolution: 144p
+  # -
+  #   output_folder: abertura-rjtv-2
+  #   url: https://www.youtube.com/watch?v=nLsbwBWM0R4
+  #   resolution: 144p
 
-  -
-    output_folder: data/abertura-jornal-nacional
-    url: https://www.youtube.com/watch?v=q7h0dxmk_5M
-    resolution: 144p
+  # -
+  #   output_folder: abertura-jornal-nacional
+  #   url: https://www.youtube.com/watch?v=q7h0dxmk_5M
+  #   resolution: 144p
