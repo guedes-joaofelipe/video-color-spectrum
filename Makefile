@@ -2,7 +2,7 @@ MLFLOW_HOST = 127.0.0.1
 MLFLOW_PORT = 8000
 MLFLOW_LOCAL_FOLDER = ./data/mlflow
 
-.PHONY: clean-all clean run server
+.PHONY: clean-all clean run server install
 
 clean-all:
 	rm -r -f data/*

@@ -52,3 +52,8 @@ videos:
     output_folder: abertura-jornal-nacional
     url: https://www.youtube.com/watch?v=q7h0dxmk_5M
     resolution: 144p
+
+  -
+    output_folder: abertura-jornal-da-globo
+    url: https://www.youtube.com/watch?v=cFqNum_T4rg
+    resolution: 144p

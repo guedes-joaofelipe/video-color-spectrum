@@ -1,8 +1,15 @@
 # Video Color Spectrum
 
-This repository contains the script to extract the color spectrum of a YouTube video.
+This repository contains the script to extract the color spectrum of a YouTube video using defined algorithm configs. The pipeline for a single video can be divided into 4 steps:
 
-## Example
+1. Download an YouTube video
+2. Break the video into its frames
+3. Apply smoothing pre-processing to the frames
+4. Extract the most predominant colors for each frame
+
+An extensive explanation of the pipeline can be found in [this medium article]().
+
+### Example
 
 By applying the pipeline for [this video](https://www.youtube.com/watch?v=eAS0XDyI_M8), we get the following color spectrum:
 
@@ -13,31 +20,53 @@ By applying the pipeline for [this video](https://www.youtube.com/watch?v=eAS0XD
 
 # Running the pipeline
 
-## Define configs
+## Install dependencies
 
-You can extract the color spectrum for multiple videos by adding their configs as an item in the `configs.yaml` file. To do so, define it with the following structure:
+The pipeline uses libraries specific libraries like:
 
-```yaml
--
-    output_folder: {extration output folder}
-    url: {YouTube URL video}
-    resolution: {video resolution (defaults to 144p)}
+- `PyYAML`: reads configuration files
+- `opencv-python`: video and image manipulation
+- `mlflow`: experiments tracking
+
+To install all dependencies, run:
+
+```bash
+pip install -r requirements
 ```
-
 
 ## Execute pipeline
 
-Once configs are define, execute the following command:
+To run the pre-defined configs, execute the following command:
 
 ```bash
 make run
 ```
 
-or, to use other parameters:
+Results are stored on local files but they are also saved using the experiments structure of the `mlflow` framework. To start an `mlflow` server and see the results, run the following command:
 
 ```bash
-python main.py --parallel=1 --configs=configs.yaml 
+make server
 ```
 
-- `parallel`: defines how many videos will be processed in parallel using the `multiprocessing` library
-- `configs`: defines the path to the configs yaml file
+## Define alternative configs
+
+Once you successfully run the pipeline for the standard configs, you can apply it to other YouTube videos with other pipeline parameters. To do so, edit the `configs.yaml` file which is structured as follows:
+
+```yaml
+# Smooth preprocessing parameters
+smooth:
+  method: GaussianBlur # options: AverageBlur, MedianBlur, GaussianBlur
+  kernel_size: 1
+
+# Clustering parameters
+color_extraction:
+  method: KMeans # options: KMeans, DBSCAN
+  params:
+    # Sklearn clustering parameters
+    n_clusters: 3
+
+-
+    output_folder: abertura-hora-1 # extraction experiment/output folder
+    url: https://www.youtube.com/watch?v=BNaT9M5-Q1o # YouTube URL video
+    resolution: 144p # video resolution (defaults to 144p)
+```
